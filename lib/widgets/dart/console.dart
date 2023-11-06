@@ -22,7 +22,7 @@ class _ConsoleState extends State<Console> {
     super.initState();
 
     WidgetsBinding.instance.endOfFrame.then(
-          (_) {
+      (_) {
         if (mounted) _startPty();
       },
     );
@@ -58,15 +58,14 @@ class _ConsoleState extends State<Console> {
     final terminalController = TerminalController();
 
     return Container(
-      padding: const EdgeInsets.all(10),
-      color: Colors.black,
+      padding: const EdgeInsets.only(top: 0, left: 10, right: 10, bottom: 10),
       child: TerminalView(
-          terminal,
+        terminal,
         textStyle: const TerminalStyle(fontSize: 17),
         controller: terminalController,
         autofocus: true,
         onSecondaryTapDown: (details, offset) async {
-            // on mouse right click
+          // on mouse right click
         },
       ),
     );

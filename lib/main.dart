@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_terminal/screens/terminal_screen.dart';
+import 'package:flutter_terminal/themes/default_theme.dart';
 
 void main() {
   runApp(const App());
@@ -12,10 +13,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: defaultTheme,
       home: const TerminalScreen(),
       debugShowCheckedModeBanner: false,
     );
