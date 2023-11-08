@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 var defaultTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.deepPurple,
-    background: const Color(0XFF1E1E1E),
+    //background: const Color(0XFF1E1E1E),
   ),
   iconButtonTheme: IconButtonThemeData(
     style: ButtonStyle(
