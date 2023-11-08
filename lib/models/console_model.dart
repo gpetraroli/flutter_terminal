@@ -1,4 +1,4 @@
-import 'package:flutter_terminal/widgets/dart/console.dart';
+import 'package:flutter_terminal/widgets/console.dart';
 
 class ConsoleModel {
   String title;
