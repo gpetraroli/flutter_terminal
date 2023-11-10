@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_terminal/providers/console_provider.dart';
+import 'package:flutter_terminal/widgets/console_tab_button.dart';
 
 class ConsoleList extends ConsumerStatefulWidget {
   const ConsoleList({super.key});
@@ -22,43 +23,53 @@ class _ConsoleListState extends ConsumerState<ConsoleList> {
   Widget build(BuildContext context) {
     var consoleModelList = ref.watch(consoleProvider);
 
-    if (consoleModelList.length > 1) {
-      print(consoleModelList[0].widget == consoleModelList[1].widget);
-    }
-
     var btns = consoleModelList
         .map(
-          (e) =>
-          ElevatedButton(
+          (e) => ConsoleTabButton(
             onPressed: () {
               setState(() {
-                print(consoleModelList.indexOf(e));
                 _activeConsoleIndex = consoleModelList.indexOf(e);
               });
             },
-            child: Text(e.title),
+            consoleModel: e,
           ),
-    )
+        )
         .toList();
-
-    btns.add(ElevatedButton(
-      onPressed: () {
-        ref.read(consoleProvider.notifier).addConsole();
-      },
-      child: const Text('new'),
-    ));
 
     return Scaffold(
         body: Column(
+      children: [
+        Row(
           children: [
-            Row(
-              children: btns,
-            ),
-            Text(_activeConsoleIndex.toString()),
-            Expanded(
-              child: consoleModelList[_activeConsoleIndex].widget,
-            ),
+            ...btns,
+            IconButton(
+              icon: const Icon(
+                Icons.add_rounded,
+                color: Colors.black,
+                size: 20,
+              ),
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(Colors.grey.shade200),
+                elevation: const MaterialStatePropertyAll(0),
+                shape: const MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(4),
+                      topRight: Radius.circular(4),
+                    ),
+                  ),
+                ),
+              ),
+              onPressed: () {
+                ref.read(consoleProvider.notifier).addConsole();
+              },
+            )
           ],
-        ));
+        ),
+        Expanded(
+          child: consoleModelList[_activeConsoleIndex].widget,
+        ),
+      ],
+    ));
   }
 }

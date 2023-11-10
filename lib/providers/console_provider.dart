@@ -9,13 +9,29 @@ final consoleProvider =
 });
 
 class ConsoleNotifier extends StateNotifier<List<ConsoleModel>> {
-  ConsoleNotifier()
-      : super([ConsoleModel('terminal 1', Console(key: UniqueKey()))]);
+  var _counter = 2;
+
+  ConsoleNotifier() : super([ConsoleModel('terminal 1')]);
 
   void addConsole() {
     state = [
       ...state,
-      ConsoleModel('terminal ${state.length + 1}', Console(key: UniqueKey()))
+      ConsoleModel('terminal $_counter'),
     ];
+    _counter++;
+  }
+
+  void closeConsole(ConsoleModel consoleModel) {
+    if (state.length == 1) {
+      return;
+    }
+
+    state.remove(consoleModel);
+    state = [...state];
+  }
+
+  void setConsoleTitle(ConsoleModel consoleModel, String title) {
+    consoleModel.title = title;
+    state = [...state];
   }
 }
