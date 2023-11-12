@@ -5,11 +5,15 @@ import 'package:flutter_terminal/providers/console_provider.dart';
 
 class ConsoleTabButton extends ConsumerWidget {
   final ConsoleModel consoleModel;
+  final bool isActive;
 
   final VoidCallback onPressed;
 
   const ConsoleTabButton(
-      {super.key, required this.consoleModel, required this.onPressed});
+      {super.key,
+      required this.consoleModel,
+      required this.onPressed,
+      required this.isActive});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +31,7 @@ class ConsoleTabButton extends ConsumerWidget {
           topLeft: Radius.circular(4),
           topRight: Radius.circular(4),
         ),
-        color: Colors.grey.shade200,
+        color: isActive ? Colors.grey.shade300 : Colors.grey.shade200,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
